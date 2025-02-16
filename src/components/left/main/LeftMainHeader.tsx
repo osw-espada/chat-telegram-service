@@ -249,7 +249,7 @@ const LeftMainHeader: FC<OwnProps & StateProps> = ({
       </>
     );
   }, [globalSearchChatId, selectedSearchDate]);
-  shouldHideSearch = true;
+
   return (
     <div className="LeftMainHeader">
       <div id="LeftMainHeader" className="left-header" ref={headerRef}>
