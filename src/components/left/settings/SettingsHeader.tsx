@@ -258,27 +258,9 @@ const SettingsHeader: FC<OwnProps> = ({
           <div className="settings-main-header">
             {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
             <h3 onClick={handleMultiClick}>
-              {oldLang('SETTINGS')}
+              {oldLang('Chat Settings')}
             </h3>
 
-            <Button
-              round
-              ripple={!isMobile}
-              size="smaller"
-              color="translucent"
-              // eslint-disable-next-line react/jsx-no-bind
-              onClick={() => onScreenSelect(SettingsScreens.EditProfile)}
-              ariaLabel={oldLang('lng_settings_information')}
-            >
-              <Icon name="edit" />
-            </Button>
-            <DropdownMenu
-              className="settings-more-menu"
-              trigger={SettingsMenuButton}
-              positionX="right"
-            >
-              <MenuItem icon="logout" onClick={openSignOutConfirmation}>{oldLang('LogOutTitle')}</MenuItem>
-            </DropdownMenu>
           </div>
         );
     }
