@@ -155,38 +155,38 @@ const SettingsPrivacy: FC<OwnProps & StateProps> = ({
           {oldLang('BlockedUsers')}
           <span className="settings-item__current-value">{blockedCount || ''}</span>
         </ListItem>
-        {canSetPasscode && (
-          <ListItem
-            icon="key"
-            narrow
-            // eslint-disable-next-line react/jsx-no-bind
-            onClick={() => onScreenSelect(
-              hasPasscode ? SettingsScreens.PasscodeEnabled : SettingsScreens.PasscodeDisabled,
-            )}
-          >
-            <div className="multiline-item">
-              <span className="title">{oldLang('Passcode')}</span>
-              <span className="subtitle" dir="auto">
-                {oldLang(hasPasscode ? 'PasswordOn' : 'PasswordOff')}
-              </span>
-            </div>
-          </ListItem>
-        )}
-        <ListItem
-          icon="lock"
-          narrow
-          // eslint-disable-next-line react/jsx-no-bind
-          onClick={() => onScreenSelect(
-            hasPassword ? SettingsScreens.TwoFaEnabled : SettingsScreens.TwoFaDisabled,
-          )}
-        >
-          <div className="multiline-item">
-            <span className="title">{oldLang('TwoStepVerification')}</span>
-            <span className="subtitle" dir="auto">
-              {oldLang(hasPassword ? 'PasswordOn' : 'PasswordOff')}
-            </span>
-          </div>
-        </ListItem>
+        {/* {canSetPasscode && ( */}
+        {/*   <ListItem */}
+        {/*     icon="key" */}
+        {/*     narrow */}
+        {/*     // eslint-disable-next-line react/jsx-no-bind */}
+        {/*     onClick={() => onScreenSelect( */}
+        {/*       hasPasscode ? SettingsScreens.PasscodeEnabled : SettingsScreens.PasscodeDisabled, */}
+        {/*     )} */}
+        {/*   > */}
+        {/*     <div className="multiline-item"> */}
+        {/*       <span className="title">{oldLang('Passcode')}</span> */}
+        {/*       <span className="subtitle" dir="auto"> */}
+        {/*         {oldLang(hasPasscode ? 'PasswordOn' : 'PasswordOff')} */}
+        {/*       </span> */}
+        {/*     </div> */}
+        {/*   </ListItem> */}
+        {/* )} */}
+        {/* <ListItem */}
+        {/*   icon="lock" */}
+        {/*   narrow */}
+        {/*   // eslint-disable-next-line react/jsx-no-bind */}
+        {/*   onClick={() => onScreenSelect( */}
+        {/*     hasPassword ? SettingsScreens.TwoFaEnabled : SettingsScreens.TwoFaDisabled, */}
+        {/*   )} */}
+        {/* > */}
+        {/*   <div className="multiline-item"> */}
+        {/*     <span className="title">{oldLang('TwoStepVerification')}</span> */}
+        {/*     <span className="subtitle" dir="auto"> */}
+        {/*       {oldLang(hasPassword ? 'PasswordOn' : 'PasswordOff')} */}
+        {/*     </span> */}
+        {/*   </div> */}
+        {/* </ListItem> */}
         {webAuthCount > 0 && (
           <ListItem
             icon="web"
