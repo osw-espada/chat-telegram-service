@@ -3,6 +3,7 @@
 import type { ApiOldLangPack } from '../api/types';
 
 export default {
+  AuthTitle: 'VEGA Chat',
   Search: 'Search',
   SavedMessages: 'Saved Messages',
   ArchivedChats: 'Archived Chats',
