@@ -11,7 +11,7 @@
   }
 
   :global(html.theme-light) & {
-    background-image: url('../assets/chat-bg-br.png');
+    background-image: url('../assets/bg-vega.jpg');
   }
 
   &::before {
@@ -21,14 +21,14 @@
     left: 0;
     bottom: 0;
     right: 0;
-    background-image: url('../assets/chat-bg-pattern-light.png');
+    background-image: url('../assets/bg-vega.jpg');
     background-position: top right;
     background-size: 510px auto;
     background-repeat: repeat;
     mix-blend-mode: overlay;
 
     :global(html.theme-dark) & {
-      background-image: url('../assets/chat-bg-pattern-dark.png');
+      background-image: url('../assets/bg-vega.jpg');
       mix-blend-mode: unset;
     }
 
