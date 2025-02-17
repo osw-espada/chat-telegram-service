@@ -200,32 +200,32 @@ const LeftSideMenuItems = ({
         icon="help"
         onClick={handleOpenTipsChat}
       >
-        {oldLang('TelegramFeatures')}
+        {oldLang('Help')}
       </MenuItem>
-      <MenuItem
-        icon="bug"
-        onClick={handleBugReportClick}
-      >
-        {lang('MenuReportBug')}
-      </MenuItem>
-      {IS_BETA && (
-        <MenuItem
-          icon="permissions"
-          onClick={handleChangelogClick}
-        >
-          {lang('MenuBetaChangelog')}
-        </MenuItem>
-      )}
-      {withOtherVersions && (
-        <MenuItem
-          icon="K"
-          isCharIcon
-          href={`${WEB_VERSION_BASE}k`}
-          onClick={handleSwitchToWebK}
-        >
-          {lang('MenuSwitchToK')}
-        </MenuItem>
-      )}
+      {/* <MenuItem */}
+      {/*   icon="bug" */}
+      {/*   onClick={handleBugReportClick} */}
+      {/* > */}
+      {/*   {lang('MenuReportBug')} */}
+      {/* </MenuItem> */}
+      {/* {IS_BETA && ( */}
+      {/*   <MenuItem */}
+      {/*     icon="permissions" */}
+      {/*     onClick={handleChangelogClick} */}
+      {/*   > */}
+      {/*     {lang('MenuBetaChangelog')} */}
+      {/*   </MenuItem> */}
+      {/* )} */}
+      {/* {withOtherVersions && ( */}
+      {/*   <MenuItem */}
+      {/*     icon="K" */}
+      {/*     isCharIcon */}
+      {/*     href={`${WEB_VERSION_BASE}k`} */}
+      {/*     onClick={handleSwitchToWebK} */}
+      {/*   > */}
+      {/*     {lang('MenuSwitchToK')} */}
+      {/*   </MenuItem> */}
+      {/* )} */}
       {canInstall && (
         <MenuItem
           icon="install"
