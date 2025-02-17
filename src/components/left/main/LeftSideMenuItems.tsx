@@ -189,13 +189,13 @@ const LeftSideMenuItems = ({
           noAnimation
         />
       </MenuItem>
-      <MenuItem
-        icon="animations"
-        onClick={handleAnimationLevelChange}
-      >
-        <span className="menu-item-name capitalize">{oldLang('Appearance.Animations').toLowerCase()}</span>
-        <Toggle value={animationLevelValue} />
-      </MenuItem>
+      {/* <MenuItem */}
+      {/*   icon="animations" */}
+      {/*   onClick={handleAnimationLevelChange} */}
+      {/* > */}
+      {/*   <span className="menu-item-name capitalize">{oldLang('Appearance.Animations').toLowerCase()}</span> */}
+      {/*   <Toggle value={animationLevelValue} /> */}
+      {/* </MenuItem> */}
       <MenuItem
         icon="help"
         onClick={handleOpenTipsChat}
