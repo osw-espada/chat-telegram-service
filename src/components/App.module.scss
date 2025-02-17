@@ -11,7 +11,8 @@
   }
 
   :global(html.theme-light) & {
-    background-image: url('../assets/bg-vega.jpg');
+    /*background-image: url('../assets/bg-vega.jpg');*/
+    background-color: #01131E;
   }
 
   &::before {
@@ -21,14 +22,16 @@
     left: 0;
     bottom: 0;
     right: 0;
-    background-image: url('../assets/bg-vega.jpg');
+    /*background-image: url('../assets/bg-vega.jpg');*/
+    background-color: #01131E;
     background-position: top right;
     background-size: 510px auto;
     background-repeat: repeat;
     mix-blend-mode: overlay;
 
     :global(html.theme-dark) & {
-      background-image: url('../assets/bg-vega.jpg');
+      /*background-image: url('../assets/bg-vega.jpg');*/
+      background-color: #01131E;
       mix-blend-mode: unset;
     }
 
