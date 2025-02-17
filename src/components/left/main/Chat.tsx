@@ -1,4 +1,4 @@
-import type { FC } from '../../../lib/teact/teact';
+import {FC, useState} from '../../../lib/teact/teact';
 import React, { memo, useEffect, useMemo } from '../../../lib/teact/teact';
 import { getActions, withGlobal } from '../../../global';
 
@@ -18,6 +18,8 @@ import type { ObserveFn } from '../../../hooks/useIntersectionObserver';
 import type { ChatAnimationTypes } from './hooks';
 import { MAIN_THREAD_ID } from '../../../api/types';
 import { StoryViewerOrigin } from '../../../types';
+
+import { VEGA_USERS_BASE_URL } from '../../../config';
 
 import {
   getMessageAction,
@@ -173,6 +175,9 @@ const Chat: FC<OwnProps & StateProps> = ({
     reportMessages,
   } = getActions();
 
+  const [peer, setPeer] = useState<any>(user || chat);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { isMobile } = useAppLayout();
   const [isDeleteModalOpen, openDeleteModal, closeDeleteModal] = useFlag();
   const [isMuteModalOpen, openMuteModal, closeMuteModal] = useFlag();
@@ -316,11 +321,47 @@ const Chat: FC<OwnProps & StateProps> = ({
     return `#${createLocationHash(chatId, 'thread', MAIN_THREAD_ID)}`;
   }, [chatId, currentUserId, isSavedDialog]);
 
+  useEffect(() => {
+    async function loadVegaUsername() {
+      try {
+        setIsLoading(true);
+        // eslint-disable-next-line max-len
+        const res = await fetch(`${VEGA_USERS_BASE_URL}/v1/users/phones`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({ phoneNumbers: [`+${peer?.phoneNumber}`] }),
+        });
+        if (!res.ok) {
+          // eslint-disable-next-line no-console
+          console.error('Error fetching VEGA users from Phone numbers:');
+        } else {
+          const { users: vegaUsers } = await res.json();
+          if (vegaUsers.length) {
+            setPeer((p: any) => ({
+              ...p,
+              firstName: vegaUsers[0].username,
+              lastName: '',
+            }));
+          }
+        }
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Network or other error:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    if (peer?.phoneNumber) loadVegaUsername();
+  }, [peer?.phoneNumber, setIsLoading]);
+
   if (!chat) {
     return undefined;
   }
 
-  const peer = user || chat;
+  /* const peer = user || chat; */
 
   const chatClassName = buildClassName(
     'Chat chat-item-clickable',
@@ -378,6 +419,7 @@ const Chat: FC<OwnProps & StateProps> = ({
       <div className="info">
         <div className="info-row">
           <FullNameTitle
+            isLoading={isLoading}
             peer={peer}
             withEmojiStatus
             isSavedMessages={chatId === user?.id && user?.isSelf}

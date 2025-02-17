@@ -49,6 +49,7 @@ type OwnProps = {
   onEmojiStatusClick?: NoneToVoidFunction;
   observeIntersection?: ObserveFn;
   statusSparklesColor?: string;
+  isLoading?: boolean;
 };
 
 const FullNameTitle: FC<OwnProps> = ({
@@ -66,6 +67,7 @@ const FullNameTitle: FC<OwnProps> = ({
   onEmojiStatusClick,
   observeIntersection,
   statusSparklesColor,
+  isLoading
 }) => {
   const lang = useOldLang();
   const { showNotification } = getActions();
@@ -132,7 +134,11 @@ const FullNameTitle: FC<OwnProps> = ({
         )}
         onClick={handleTitleClick}
       >
-        {specialTitle || renderText(title || '')}
+        {isLoading ? (
+          <div className={styles.chatnameLoader} />
+        ) : (
+          specialTitle || renderText(title || '')
+        )}
       </h3>
       {!iconElement && peer && (
         <>
