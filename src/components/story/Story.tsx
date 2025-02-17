@@ -259,7 +259,7 @@ function Story({
 
   const isStreamingSupported = useStreaming(videoRef, fullMediaData, PRIMARY_VIDEO_MIME);
 
-  useStoryPreloader(peerId, storyId);
+  // useStoryPreloader(peerId, storyId);
 
   useEffect(() => {
     if (storyId) {
