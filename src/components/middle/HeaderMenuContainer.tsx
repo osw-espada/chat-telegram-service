@@ -561,14 +561,14 @@ const HeaderMenuContainer: FC<OwnProps & StateProps> = ({
               {lang(isChannel ? 'BoostingBoostChannelMenu' : 'BoostingBoostGroupMenu')}
             </MenuItem>
           )}
-          {canAddContact && (
-            <MenuItem
-              icon="add-user"
-              onClick={handleAddContactClick}
-            >
-              {lang('AddContact')}
-            </MenuItem>
-          )}
+          {/* {canAddContact && ( */}
+          {/*   <MenuItem */}
+          {/*     icon="add-user" */}
+          {/*     onClick={handleAddContactClick} */}
+          {/*   > */}
+          {/*     {lang('AddContact')} */}
+          {/*   </MenuItem> */}
+          {/* )} */}
           {isMobile && canCall && (
             <MenuItem
               icon="phone"
