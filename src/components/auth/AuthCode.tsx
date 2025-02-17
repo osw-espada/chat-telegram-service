@@ -91,24 +91,25 @@ const AuthCode: FC<StateProps> = ({
   return (
     <div id="auth-code-form" className="custom-scroll">
       <div className="auth-form">
-        <TrackingMonkey
-          code={code}
-          codeLength={CODE_LENGTH}
-          isTracking={isTracking}
-          trackingDirection={trackingDirection}
-        />
+        <div id="logo"/>
+        {/* <TrackingMonkey */}
+        {/*   code={code} */}
+        {/*   codeLength={CODE_LENGTH} */}
+        {/*   isTracking={isTracking} */}
+        {/*   trackingDirection={trackingDirection} */}
+        {/* /> */}
         <h1>
           {authPhoneNumber}
-          <div
-            className="auth-number-edit div-button"
-            onClick={handleReturnToAuthPhoneNumber}
-            role="button"
-            tabIndex={0}
-            title={lang('WrongNumber')}
-            aria-label={lang('WrongNumber')}
-          >
-            <Icon name="edit" />
-          </div>
+          {/* <div */}
+          {/*   className="auth-number-edit div-button" */}
+          {/*   onClick={handleReturnToAuthPhoneNumber} */}
+          {/*   role="button" */}
+          {/*   tabIndex={0} */}
+          {/*   title={lang('WrongNumber')} */}
+          {/*   aria-label={lang('WrongNumber')} */}
+          {/* > */}
+          {/*   <Icon name="edit"/> */}
+          {/* </div> */}
         </h1>
         <p className="note">
           {lang(authIsCodeViaApp ? 'SentAppCode' : 'LoginJustSentSms', undefined, {
@@ -126,7 +127,7 @@ const AuthCode: FC<StateProps> = ({
           autoComplete="off"
           inputMode="numeric"
         />
-        {authIsLoading && <Loading />}
+        {authIsLoading && <Loading/>}
       </div>
     </div>
   );
