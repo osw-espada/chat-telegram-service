@@ -297,9 +297,9 @@ const LeftMainHeader: FC<OwnProps & StateProps> = ({
           onSpinnerClick={connectionStatusPosition === 'minimized' ? toggleConnectionStatus : undefined}
         >
           {searchContent}
-          <StoryToggler
-            canShow={withStoryToggler}
-          />
+          {/* <StoryToggler */}
+          {/*   canShow={withStoryToggler} */}
+          {/* /> */}
         </SearchInput>
         {isCurrentUserPremium && <StatusButton />}
         {hasPasscode && (

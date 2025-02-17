@@ -126,9 +126,9 @@ const LeftSideMenuItems = ({
     openUrl({ url: FEEDBACK_URL });
   });
 
-  const handleOpenMyStories = useLastCallback(() => {
-    openChatWithInfo({ id: currentUserId, shouldReplaceHistory: true, profileTab: 'stories' });
-  });
+  // const handleOpenMyStories = useLastCallback(() => {
+  //   openChatWithInfo({ id: currentUserId, shouldReplaceHistory: false, profileTab: 'stories' });
+  // });
 
   return (
     <>
@@ -165,17 +165,17 @@ const LeftSideMenuItems = ({
           onMenuClosed={onBotMenuClosed}
         />
       ))}
-      <MenuItem
-        icon="play-story"
-        onClick={handleOpenMyStories}
-      >
-        {oldLang('Settings.MyStories')}
-      </MenuItem>
+      {/* <MenuItem */}
+      {/*   icon="play-story" */}
+      {/*   onClick={handleOpenMyStories} */}
+      {/* > */}
+      {/*   {oldLang('Settings.MyStories')} */}
+      {/* </MenuItem> */}
       <MenuItem
         icon="settings"
         onClick={onSelectSettings}
       >
-        {oldLang('Settings')}
+        {oldLang('Chat Settings')}
       </MenuItem>
       <MenuItem
         icon="darkmode"
