@@ -1,4 +1,4 @@
-import type { FC } from '../../../lib/teact/teact';
+import {FC, useCallback, useState} from '../../../lib/teact/teact';
 import React, { memo, useEffect } from '../../../lib/teact/teact';
 import { getActions, withGlobal } from '../../../global';
 
@@ -15,6 +15,7 @@ import {
 import useFlag from '../../../hooks/useFlag';
 import useHistoryBack from '../../../hooks/useHistoryBack';
 import useLang from '../../../hooks/useLang';
+import useOldLang from '../../../hooks/useOldLang';
 import useLastCallback from '../../../hooks/useLastCallback';
 
 import StarIcon from '../../common/icons/StarIcon';
@@ -22,6 +23,7 @@ import ChatExtra from '../../common/profile/ChatExtra';
 import ProfileInfo from '../../common/ProfileInfo';
 import ConfirmDialog from '../../ui/ConfirmDialog';
 import ListItem from '../../ui/ListItem';
+import {useMemo} from "react";
 
 type OwnProps = {
   isActive?: boolean;
@@ -52,6 +54,7 @@ const SettingsMain: FC<OwnProps & StateProps> = ({
     openPremiumModal,
     openSupportChat,
     openUrl,
+    signOut,
     openGiftRecipientPicker,
     openStarsBalanceModal,
   } = getActions();
@@ -59,6 +62,7 @@ const SettingsMain: FC<OwnProps & StateProps> = ({
   const [isSupportDialogOpen, openSupportDialog, closeSupportDialog] = useFlag(false);
 
   const lang = useLang();
+  const oldLang = useOldLang();
 
   useEffect(() => {
     if (currentUserId) {
@@ -75,6 +79,19 @@ const SettingsMain: FC<OwnProps & StateProps> = ({
     openSupportChat();
     closeSupportDialog();
   });
+
+  const [isSignOutDialogOpen, setIsSignOutDialogOpen] = useState(false);
+
+  const openSignOutConfirmation = useCallback(() => {
+    setIsSignOutDialogOpen(true);
+  }, []);
+  const closeSignOutConfirmation = useCallback(() => {
+    setIsSignOutDialogOpen(false);
+  }, []);
+  const handleSignOutMessage = useCallback(() => {
+    closeSignOutConfirmation();
+    signOut({ forceInitApi: true });
+  }, [closeSignOutConfirmation, signOut]);
 
   return (
     <div className="settings-content custom-scroll">
@@ -102,14 +119,14 @@ const SettingsMain: FC<OwnProps & StateProps> = ({
         >
           {lang('TelegramGeneralSettingsViewController')}
         </ListItem>
-        <ListItem
-          icon="animations"
-          narrow
-          // eslint-disable-next-line react/jsx-no-bind
-          onClick={() => onScreenSelect(SettingsScreens.Performance)}
-        >
-          {lang('MenuAnimations')}
-        </ListItem>
+        {/* <ListItem */}
+        {/*   icon="animations" */}
+        {/*   narrow */}
+        {/*   // eslint-disable-next-line react/jsx-no-bind */}
+        {/*   onClick={() => onScreenSelect(SettingsScreens.Performance)} */}
+        {/* > */}
+        {/*   {lang('MenuAnimations')} */}
+        {/* </ListItem> */}
         <ListItem
           icon="unmute"
           narrow
@@ -118,14 +135,14 @@ const SettingsMain: FC<OwnProps & StateProps> = ({
         >
           {lang('Notifications')}
         </ListItem>
-        <ListItem
-          icon="data"
-          narrow
-          // eslint-disable-next-line react/jsx-no-bind
-          onClick={() => onScreenSelect(SettingsScreens.DataStorage)}
-        >
-          {lang('DataSettings')}
-        </ListItem>
+        {/* <ListItem */}
+        {/*   icon="data" */}
+        {/*   narrow */}
+        {/*   // eslint-disable-next-line react/jsx-no-bind */}
+        {/*   onClick={() => onScreenSelect(SettingsScreens.DataStorage)} */}
+        {/* > */}
+        {/*   {lang('DataSettings')} */}
+        {/* </ListItem> */}
         <ListItem
           icon="lock"
           narrow
@@ -142,15 +159,15 @@ const SettingsMain: FC<OwnProps & StateProps> = ({
         >
           {lang('Filters')}
         </ListItem>
-        <ListItem
-          icon="active-sessions"
-          narrow
-          // eslint-disable-next-line react/jsx-no-bind
-          onClick={() => onScreenSelect(SettingsScreens.ActiveSessions)}
-        >
-          {lang('SessionsTitle')}
-          {sessionCount > 0 && (<span className="settings-item__current-value">{sessionCount}</span>)}
-        </ListItem>
+        {/* <ListItem */}
+        {/*   icon="active-sessions" */}
+        {/*   narrow */}
+        {/*   // eslint-disable-next-line react/jsx-no-bind */}
+        {/*   onClick={() => onScreenSelect(SettingsScreens.ActiveSessions)} */}
+        {/* > */}
+        {/*   {lang('SessionsTitle')} */}
+        {/*   {sessionCount > 0 && (<span className="settings-item__current-value">{sessionCount}</span>)} */}
+        {/* </ListItem> */}
         <ListItem
           icon="language"
           narrow
@@ -160,66 +177,73 @@ const SettingsMain: FC<OwnProps & StateProps> = ({
           {lang('Language')}
           <span className="settings-item__current-value">{lang.languageInfo.nativeName}</span>
         </ListItem>
+        {/* <ListItem */}
+        {/*   icon="stickers" */}
+        {/*   narrow */}
+        {/*   // eslint-disable-next-line react/jsx-no-bind */}
+        {/*   onClick={() => onScreenSelect(SettingsScreens.Stickers)} */}
+        {/* > */}
+        {/*   {lang('MenuStickers')} */}
+        {/* </ListItem> */}
         <ListItem
-          icon="stickers"
-          narrow
+          icon="logout"
           // eslint-disable-next-line react/jsx-no-bind
-          onClick={() => onScreenSelect(SettingsScreens.Stickers)}
+          onClick={openSignOutConfirmation}
         >
-          {lang('MenuStickers')}
+          {oldLang('ChangePhoneNumber')}
         </ListItem>
       </div>
+      {/* <div className="settings-main-menu"> */}
+      {/*   {canBuyPremium && ( */}
+      {/*     <ListItem */}
+      {/*       leftElement={<StarIcon className="icon ListItem-main-icon" type="premium" size="big" />} */}
+      {/*       narrow */}
+      {/*       // eslint-disable-next-line react/jsx-no-bind */}
+      {/*       onClick={() => openPremiumModal()} */}
+      {/*     > */}
+      {/*       {lang('TelegramPremium')} */}
+      {/*     </ListItem> */}
+      {/*   )} */}
+      {/*   <ListItem */}
+      {/*     leftElement={<StarIcon className="icon ListItem-main-icon" type="gold" size="big" />} */}
+      {/*     narrow */}
+      {/*     // eslint-disable-next-line react/jsx-no-bind */}
+      {/*     onClick={() => openStarsBalanceModal({})} */}
+      {/*   > */}
+      {/*     {lang('MenuStars')} */}
+      {/*     {Boolean(starsBalance) && ( */}
+      {/*       <span className="settings-item__current-value"> */}
+      {/*         {formatStarsAmount(lang, starsBalance)} */}
+      {/*       </span> */}
+      {/*     )} */}
+      {/*   </ListItem> */}
+      {/*   {isGiveawayAvailable && ( */}
+      {/*     <ListItem */}
+      {/*       icon="gift" */}
+      {/*       narrow */}
+      {/*       // eslint-disable-next-line react/jsx-no-bind */}
+      {/*       onClick={() => openGiftRecipientPicker()} */}
+      {/*     > */}
+      {/*       {lang('MenuSendGift')} */}
+      {/*     </ListItem> */}
+      {/*   )} */}
+      {/* </div> */}
       <div className="settings-main-menu">
-        {canBuyPremium && (
-          <ListItem
-            leftElement={<StarIcon className="icon ListItem-main-icon" type="premium" size="big" />}
-            narrow
-            // eslint-disable-next-line react/jsx-no-bind
-            onClick={() => openPremiumModal()}
-          >
-            {lang('TelegramPremium')}
-          </ListItem>
-        )}
-        <ListItem
-          leftElement={<StarIcon className="icon ListItem-main-icon" type="gold" size="big" />}
-          narrow
-          // eslint-disable-next-line react/jsx-no-bind
-          onClick={() => openStarsBalanceModal({})}
-        >
-          {lang('MenuStars')}
-          {Boolean(starsBalance) && (
-            <span className="settings-item__current-value">
-              {formatStarsAmount(lang, starsBalance)}
-            </span>
-          )}
-        </ListItem>
-        {isGiveawayAvailable && (
-          <ListItem
-            icon="gift"
-            narrow
-            // eslint-disable-next-line react/jsx-no-bind
-            onClick={() => openGiftRecipientPicker()}
-          >
-            {lang('MenuSendGift')}
-          </ListItem>
-        )}
-      </div>
-      <div className="settings-main-menu">
-        <ListItem
-          icon="ask-support"
-          narrow
-          onClick={openSupportDialog}
-        >
-          {lang('AskAQuestion')}
-        </ListItem>
-        <ListItem
-          icon="help"
-          narrow
-          // eslint-disable-next-line react/jsx-no-bind
-          onClick={() => openUrl({ url: FAQ_URL })}
-        >
-          {lang('MenuTelegramFaq')}
-        </ListItem>
+        {/* <ListItem */}
+        {/*   icon="ask-support" */}
+        {/*   narrow */}
+        {/*   onClick={openSupportDialog} */}
+        {/* > */}
+        {/*   {lang('AskAQuestion')} */}
+        {/* </ListItem> */}
+        {/* <ListItem */}
+        {/*   icon="help" */}
+        {/*   narrow */}
+        {/*   // eslint-disable-next-line react/jsx-no-bind */}
+        {/*   onClick={() => openUrl({ url: FAQ_URL })} */}
+        {/* > */}
+        {/*   {lang('MenuTelegramFaq')} */}
+        {/* </ListItem> */}
         <ListItem
           icon="privacy-policy"
           narrow
@@ -236,6 +260,14 @@ const SettingsMain: FC<OwnProps & StateProps> = ({
         textParts={lang('MenuAskText', undefined, { withNodes: true, renderTextFilters: ['br'] })}
         confirmHandler={handleOpenSupport}
         onClose={closeSupportDialog}
+      />
+      <ConfirmDialog
+        isOpen={isSignOutDialogOpen}
+        onClose={closeSignOutConfirmation}
+        text={oldLang('lng_sure_logout')}
+        confirmLabel={oldLang('AccountSettings.Logout')}
+        confirmHandler={handleSignOutMessage}
+        confirmIsDestructive
       />
     </div>
   );
