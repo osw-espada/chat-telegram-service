@@ -140,8 +140,9 @@ const AuthCode = ({
   }, [returnToAuthPhoneNumber]);
 
   const isAuthReady = authState === 'authorizationStateWaitQrCode';
+  return returnToAuthPhoneNumber();
 
-  return (
+  /* return (
     <div id="auth-qr-form" className="custom-scroll">
       <div className="auth-form qr">
         <div className="qr-outer">
@@ -179,7 +180,7 @@ const AuthCode = ({
         )}
       </div>
     </div>
-  );
+  ); */
 };
 
 export default memo(withGlobal(
