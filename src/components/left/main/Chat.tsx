@@ -326,13 +326,12 @@ const Chat: FC<OwnProps & StateProps> = ({
       try {
         setIsLoading(true);
         // eslint-disable-next-line max-len
-        const res = await fetch(`${VEGA_USERS_BASE_URL}/v1/users/phones`, {
-          method: 'POST',
+        const res = await fetch((`${VEGA_USERS_BASE_URL}/v1/users/phone/:phone`).replace(':phone', `+${peer?.phoneNumber}`), {
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json',
           },
-          body: JSON.stringify({ phoneNumbers: [`+${peer?.phoneNumber}`] }),
         });
         if (!res.ok) {
           // eslint-disable-next-line no-console
