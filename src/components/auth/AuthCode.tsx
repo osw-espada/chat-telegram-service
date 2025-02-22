@@ -100,16 +100,16 @@ const AuthCode: FC<StateProps> = ({
         {/* /> */}
         <h1>
           {authPhoneNumber}
-          {/* <div */}
-          {/*   className="auth-number-edit div-button" */}
-          {/*   onClick={handleReturnToAuthPhoneNumber} */}
-          {/*   role="button" */}
-          {/*   tabIndex={0} */}
-          {/*   title={lang('WrongNumber')} */}
-          {/*   aria-label={lang('WrongNumber')} */}
-          {/* > */}
-          {/*   <Icon name="edit"/> */}
-          {/* </div> */}
+          <div
+            className="auth-number-edit div-button"
+            onClick={handleReturnToAuthPhoneNumber}
+            role="button"
+            tabIndex={0}
+            title={lang('WrongNumber')}
+            aria-label={lang('WrongNumber')}
+          >
+            <Icon name="reload" />
+          </div>
         </h1>
         <p className="note">
           {lang(authIsCodeViaApp ? 'SentAppCode' : 'LoginJustSentSms', undefined, {
