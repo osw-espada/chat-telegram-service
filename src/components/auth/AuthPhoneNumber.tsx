@@ -20,6 +20,7 @@ import { getSuggestedLanguage } from './helpers/getSuggestedLanguage';
 import useFlag from '../../hooks/useFlag';
 import useLang from '../../hooks/useLang';
 import useLangString from '../../hooks/useLangString';
+import useOldLang from '../../hooks/useOldLang';
 
 import Button from '../ui/Button';
 import Checkbox from '../ui/Checkbox';
@@ -48,7 +49,7 @@ const AuthPhoneNumber: FC<StateProps> = ({
   authState,
   authPhoneNumber,
   authIsLoading,
-  authIsLoadingQrCode,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   authErrorKey,
   authRememberMe,
   authNearestCountry,
@@ -66,6 +67,7 @@ const AuthPhoneNumber: FC<StateProps> = ({
   } = getActions();
 
   const lang = useLang();
+  const oldLang = useOldLang();
   // eslint-disable-next-line no-null/no-null
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestedLanguage = getSuggestedLanguage();
@@ -80,6 +82,22 @@ const AuthPhoneNumber: FC<StateProps> = ({
 
   const fullNumber = country ? `+${country.countryCode} ${phoneNumber || ''}` : phoneNumber;
   const canSubmit = fullNumber && fullNumber.replace(/[^\d]+/g, '').length >= MIN_NUMBER_LENGTH;
+  const validLength = country?.patterns?.[0].replace(' ', '').length;
+  const inputNumberLength = phoneNumber?.replace(' ', '').length;
+  // eslint-disable-next-line react-hooks-static-deps/exhaustive-deps
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  const phone = params.get('phnumber');
+
+  useEffect(() => {
+    if (params && phone) {
+      const inputtedPhoneNumber = `${code}${phone}`;
+
+      const detectedCountry = getCountryFromPhoneNumber(phoneCodeList, inputtedPhoneNumber);
+      setCountry(detectedCountry);
+      setPhoneNumber(formatPhoneNumber(inputtedPhoneNumber, detectedCountry));
+    }
+  }, [code, params, phone, phoneCodeList]);
 
   useEffect(() => {
     if (!IS_TOUCH_ENV) {
@@ -104,6 +122,14 @@ const AuthPhoneNumber: FC<StateProps> = ({
       setCountry(getCountryCodesByIso(phoneCodeList, authNearestCountry)[0]);
     }
   }, [country, authNearestCountry, isTouched, phoneCodeList]);
+
+  // eslint-disable-next-line react-hooks-static-deps/exhaustive-deps
+  const onSaveWithNumber = () => {
+    if (country && phoneNumber && inputNumberLength === validLength) {
+      // @ts-ignore
+      handleSubmit();
+    }
+  };
 
   const parseFullNumber = useCallback((newFullNumber: string) => {
     if (!newFullNumber.length) {
@@ -138,8 +164,10 @@ const AuthPhoneNumber: FC<StateProps> = ({
   useEffect(() => {
     if (phoneNumber === undefined && authPhoneNumber) {
       parseFullNumber(authPhoneNumber);
+    } else {
+      onSaveWithNumber();
     }
-  }, [authPhoneNumber, phoneNumber, parseFullNumber]);
+  }, [authPhoneNumber, phoneNumber, parseFullNumber, onSaveWithNumber]);
 
   useLayoutEffect(() => {
     if (inputRef.current && lastSelection) {
@@ -195,28 +223,26 @@ const AuthPhoneNumber: FC<StateProps> = ({
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (authIsLoading) {
-      return;
-    }
+    if (authIsLoading) return;
 
     if (canSubmit) {
       setAuthPhoneNumber({ phoneNumber: fullNumber });
     }
   }
 
-  const handleGoToAuthQrCode = useCallback(() => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  useCallback(() => {
     goToAuthQrCode();
   }, [goToAuthQrCode]);
-
   const isAuthReady = authState === 'authorizationStateWaitPhoneNumber';
 
   return (
     <div id="auth-phone-number-form" className="custom-scroll">
       <div className="auth-form">
         <div id="logo" />
-        <h1>{lang('AuthTitle')}</h1>
+        <h1>{oldLang('AuthTitle')}</h1>
         <p className="note">{lang('StartText')}</p>
-        <form className="form" action="" onSubmit={handleSubmit}>
+        <form className="form" action="" id="form_login" onSubmit={handleSubmit}>
           <CountryCodeInput
             id="sign-in-phone-code"
             value={country}
@@ -230,6 +256,7 @@ const AuthPhoneNumber: FC<StateProps> = ({
             value={fullNumber}
             error={authErrorKey && lang.withRegular(authErrorKey)}
             inputMode="tel"
+            readOnly
             onChange={handlePhoneNumberChange}
             onPaste={IS_SAFARI ? handlePaste : undefined}
           />
@@ -246,11 +273,11 @@ const AuthPhoneNumber: FC<StateProps> = ({
               <Loading />
             )
           )}
-          {isAuthReady && (
-            <Button size="smaller" isText ripple isLoading={authIsLoadingQrCode} onClick={handleGoToAuthQrCode}>
-              {lang('LoginQRLogin')}
-            </Button>
-          )}
+          {/* {isAuthReady && ( */}
+          {/*   <Button size="smaller" isText ripple isLoading={authIsLoadingQrCode} onClick={handleGoToAuthQrCode}> */}
+          {/*     {lang('LoginQRLogin')} */}
+          {/*   </Button> */}
+          {/* )} */}
           {suggestedLanguage && suggestedLanguage !== language && continueText && (
             <Button size="smaller" isText isLoading={isLoading} onClick={handleLangChange}>{continueText}</Button>
           )}
