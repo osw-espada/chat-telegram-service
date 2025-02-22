@@ -1,5 +1,7 @@
-import {FC, useState} from '../../../lib/teact/teact';
-import React, { memo, useEffect, useMemo } from '../../../lib/teact/teact';
+import type { FC } from '../../../lib/teact/teact';
+import React, {
+  memo, useEffect, useMemo, useState,
+} from '../../../lib/teact/teact';
 import { getActions, withGlobal } from '../../../global';
 
 import type {
@@ -20,7 +22,6 @@ import { MAIN_THREAD_ID } from '../../../api/types';
 import { StoryViewerOrigin } from '../../../types';
 
 import { VEGA_USERS_BASE_URL } from '../../../config';
-
 import {
   getMessageAction,
   groupStatetefulContent,
