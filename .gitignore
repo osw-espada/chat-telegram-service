@@ -12,3 +12,8 @@ dev/perf/screenshot*
 .DS_store
 .github/workflows/*
 !.github/workflows/package-and-publish.yml
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
