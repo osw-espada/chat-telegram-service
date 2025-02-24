@@ -108,7 +108,6 @@
     "git-revision-webpack-plugin": "^5.0.0",
     "gitlog": "^4.0.8",
     "html-webpack-plugin": "^5.6.0",
-    "husky": "^9.0.11",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^15.2.2",
@@ -133,6 +132,7 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
+    "husky": "^9.0.11",
     "@cryptography/aes": "^0.1.1",
     "async-mutex": "^0.5.0",
     "big-integer": "github:painor/BigInteger.js",
