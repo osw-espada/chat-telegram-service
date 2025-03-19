@@ -1,1 +1,1 @@
-web: npm install && npx webpack serve
+web: npm run dev

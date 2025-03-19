@@ -1,4 +1,5 @@
 dist
+dist/*
 dist/build-stats.json
 node_modules
 .cache
