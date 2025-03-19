@@ -126,7 +126,6 @@
     "stylelint-selector-tag-no-without-class": "^3.0.1",
     "telegraph-node": "^1.0.4",
     "tsx": "^4.11.0"
-
   },
   "dependencies": {
     "typescript": "^5.4.5",
