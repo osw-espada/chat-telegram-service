@@ -47,7 +47,7 @@
   },
   "author": "Alexander Zinchuk (alexander@zinchuk.com)",
   "license": "GPL-3.0-or-later",
-  "devDependencies": {
+  "dependencies": {
     "@babel/core": "^7.24.5",
     "@babel/plugin-syntax-nullish-coalescing-operator": "^7.8.3",
     "@babel/plugin-transform-class-properties": "^7.24.1",
@@ -124,9 +124,7 @@
     "stylelint-high-performance-animation": "^1.10.0",
     "stylelint-selector-tag-no-without-class": "^3.0.1",
     "telegraph-node": "^1.0.4",
-    "tsx": "^4.11.0"
-  },
-  "dependencies": {
+    "tsx": "^4.11.0",
     "typescript": "^5.4.5",
     "webpack": "^5.91.0",
     "webpack-dev-server": "^5.0.4",
