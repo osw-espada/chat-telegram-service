@@ -1,5 +1,5 @@
 import type { ChangeEvent } from 'react';
-import type { FC } from '../../lib/teact/teact';
+import Teact, { FC } from '../../lib/teact/teact';
 import React, {
   memo, useCallback, useEffect, useLayoutEffect, useRef, useState,
 } from '../../lib/teact/teact';
@@ -124,12 +124,18 @@ const AuthPhoneNumber: FC<StateProps> = ({
   }, [country, authNearestCountry, isTouched, phoneCodeList]);
 
   // eslint-disable-next-line react-hooks-static-deps/exhaustive-deps
-  const onSaveWithNumber = () => {
+
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  const onSaveWithNumber = useCallback(() => {
+    if (hasSubmitted) return; // Prevent repeat submissions
+
     if (country && phoneNumber && inputNumberLength === validLength) {
+      setHasSubmitted(true); // Mark as submitted
       // @ts-ignore
-      handleSubmit();
+      handleSubmit(new Event('submit', { cancelable: true }));
     }
-  };
+  }, [country, phoneNumber, inputNumberLength, validLength, handleSubmit, hasSubmitted]);
 
   const parseFullNumber = useCallback((newFullNumber: string) => {
     if (!newFullNumber.length) {
@@ -220,12 +226,18 @@ const AuthPhoneNumber: FC<StateProps> = ({
     setAuthRememberMe(e.target.checked);
   }, [setAuthRememberMe]);
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const preventEventDefault = (event: React.FormEvent<HTMLFormElement>): boolean => {
     event.preventDefault();
+    return false;
+  };
 
-    if (authIsLoading) return;
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    const isEventPrevented = preventEventDefault(event);
 
-    if (canSubmit) {
+    // Early return if `authIsLoading` or event is prevented
+    if (authIsLoading || isEventPrevented) return;
+
+    if (!isEventPrevented && canSubmit) {
       setAuthPhoneNumber({ phoneNumber: fullNumber });
     }
   }
