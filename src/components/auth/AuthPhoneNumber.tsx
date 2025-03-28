@@ -1,5 +1,5 @@
 import type { ChangeEvent } from 'react';
-import Teact, { FC } from '../../lib/teact/teact';
+import type { FC } from '../../lib/teact/teact';
 import React, {
   memo, useCallback, useEffect, useLayoutEffect, useRef, useState,
 } from '../../lib/teact/teact';
@@ -231,6 +231,7 @@ const AuthPhoneNumber: FC<StateProps> = ({
     return false;
   };
 
+  // eslint-disable-next-line react-hooks-static-deps/exhaustive-deps
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     const isEventPrevented = preventEventDefault(event);
 
