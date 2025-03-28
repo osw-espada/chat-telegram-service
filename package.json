@@ -128,8 +128,6 @@
     "postcss-modules": "^6.0.0",
     "qr-code-styling": "github:zubiden/qr-code-styling#dbbfed0",
     "react": "^18.3.1",
-    "sass": "^1.77.0",
-    "sass-loader": "^14.2.1",
     "script-loader": "^0.7.2",
     "serve": "^14.2.3",
     "stylelint": "^16.5.0",
@@ -152,6 +150,8 @@
   "devDependencies": {
     "css-loader": "^7.1.2",
     "file-loader": "^6.2.0",
+    "sass": "^1.86.0",
+    "sass-loader": "^16.0.5",
     "style-loader": "^4.0.0"
   }
 }
