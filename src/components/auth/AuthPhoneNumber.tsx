@@ -268,7 +268,7 @@ const AuthPhoneNumber: FC<StateProps> = ({
             value={fullNumber}
             error={authErrorKey && lang.withRegular(authErrorKey)}
             inputMode="tel"
-            readOnly
+            // readOnly
             onChange={handlePhoneNumberChange}
             onPaste={IS_SAFARI ? handlePaste : undefined}
           />
