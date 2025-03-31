@@ -145,21 +145,9 @@ export default function createConfig(
               },
             },
             'postcss-loader',
-            {
-              loader: 'sass-loader',
-              options: {
-                // Explicitly define the implementation and enable the legacy API
-                implementation: require('sass'), // Ensure Dart Sass is used
-                sassOptions: {
-                  quietDeps: true,
-                  // Optionally toggle specific legacy behaviors
-                  useLegacyJavaScriptApi: true, // React-specific compatibility with legacy API
-                },
-              },
-            },
+            'sass-loader',
           ],
         },
-
         {
           test: /\.(woff(2)?|ttf|eot|svg|png|jpg|tgs)(\?v=\d+\.\d+\.\d+)?$/,
           type: 'asset/resource',
