@@ -163,6 +163,10 @@ export default function createConfig(
       ],
     },
 
+    stats: {
+      warningsFilter: [/sass-loader/, /postcss-loader/], // Suppress specific warnings
+    },
+
     resolve: {
       extensions: ['.js', '.ts', '.tsx'],
       fallback: {
