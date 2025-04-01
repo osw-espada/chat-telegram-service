@@ -104,6 +104,12 @@ export default function createConfig(
       path: path.resolve(__dirname, 'dist'),
       clean: true,
     },
+    ignoreWarnings: [
+      (warning) => {
+        // Customize which warnings to ignore
+        return warning.message.includes('DEPRECATION');
+      },
+    ],
 
     module: {
       rules: [
@@ -161,10 +167,6 @@ export default function createConfig(
           type: 'asset/source',
         },
       ],
-    },
-
-    stats: {
-      warningsFilter: [/sass-loader/, /postcss-loader/], // Suppress specific warnings
     },
 
     resolve: {
