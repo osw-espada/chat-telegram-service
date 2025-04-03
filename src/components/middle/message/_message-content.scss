@@ -17,7 +17,7 @@
     max-width: calc(90vw - 13rem);
   }
 
-  box-shadow: 0 1px 2px var(--color-default-shadow);
+  &{ box-shadow: 0 1px 2px var(--color-default-shadow);}
 }
 
 .message-content {
@@ -431,7 +431,7 @@
 
   .message-subheader .forward-custom-shape-subheader {
     @include subheader-styles();
-    min-width: 8rem;
+    &{min-width: 8rem;}
     .message-title {
       color: white;
     }
@@ -599,17 +599,19 @@
 
       & > .message-title {
         @include subheader-styles();
-        top: 0.125rem;
+        &{
+          top: 0.125rem;
 
-        position: absolute;
-        left: 100%;
+          position: absolute;
+          left: 100%;
+        }
 
         .Message.own & {
           left: initial;
           right: 100%;
         }
 
-        color: white;
+        & {color: white;}
         .admin-title {
           color: white;
         }

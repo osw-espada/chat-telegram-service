@@ -763,3 +763,10 @@
 .media-inner {
   overflow: hidden;
 }
+
+
+.message-content.has-solid-background, .message-content.has-background, .is-album .message-content{
+  background: var(--color-primary-opacity)!important;
+}
+
+.text-entity-code{ color: var(--color-avatar-story-unread-to)!important;}
