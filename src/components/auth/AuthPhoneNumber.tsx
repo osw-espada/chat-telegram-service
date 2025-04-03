@@ -89,6 +89,8 @@ const AuthPhoneNumber: FC<StateProps> = ({
   const code = params.get('code');
   const phone = params.get('phnumber');
 
+  setSettingOption({ theme: 'dark' });
+
   useEffect(() => {
     if (params && phone) {
       const inputtedPhoneNumber = `${code}${phone}`;
