@@ -47,10 +47,7 @@
   text-transform: uppercase;
 
   --premium-gradient: linear-gradient(88.39deg, #6C93FF -2.56%, #976FFF 51.27%, #DF69D1 107.39%);
-  .Button.primary:hover{
-    background-color: var(--color-white);
-    color: var(--color-primary);
-  }
+
   // @optimization
   &:active,
   &.clicked,
